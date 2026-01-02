@@ -1,11 +1,14 @@
 import express from "express"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser";
+import cors from "cors";
+
 import authRouter from "./routes/auth.js"
 import connectDB from "../db.js";
-import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js"
 import chatRouter from "./routes/chat.router.js"
-import cors from "cors";
+import aiRouter from "./routes/ai.route.js"
+
 dotenv.config();
 const port = process.env.PORT
 
@@ -29,6 +32,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/chat", chatRouter);
+app.use("/api/ai", aiRouter);
 
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
